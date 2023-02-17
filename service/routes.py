@@ -9,7 +9,6 @@ from service.models import Account
 from service.common import status  # HTTP Status Codes
 from . import app  # Import Flask application
 
-
 ############################################################
 # Health Endpoint
 ############################################################
@@ -17,7 +16,6 @@ from . import app  # Import Flask application
 def health():
     """Health Status"""
     return jsonify(dict(status="OK")), status.HTTP_200_OK
-
 
 ######################################################################
 # GET INDEX
@@ -33,7 +31,6 @@ def index():
         ),
         status.HTTP_200_OK,
     )
-
 
 ######################################################################
 # CREATE A NEW ACCOUNT
@@ -58,7 +55,6 @@ def create_accounts():
         jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
     )
 
-
 ######################################################################
 # READ AN ACCOUNT
 ######################################################################
@@ -79,8 +75,6 @@ def get_account(account_id):
     app.logger.info("Returning account with id [%s]", account_id )
 
     return account.serialize(), status.HTTP_200_OK
-
-
 
 ######################################################################
 #  U T I L I T Y   F U N C T I O N S

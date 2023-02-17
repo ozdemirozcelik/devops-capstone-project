@@ -19,7 +19,6 @@ DATABASE_URI = os.getenv(
 
 BASE_URL = "/accounts"
 
-
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
@@ -137,3 +136,13 @@ class TestAccountService(TestCase):
         data = resp.get_json()
         self.assertEqual(data["id"], account.id)
 
+    def test_method_not_allowed(self):
+        """It should not allow an illegal method call"""
+        resp = self.client.delete(BASE_URL)
+        self.assertEqual(resp.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_not_found(self):
+        """It should not find the account"""
+        account_id = 1.5
+        resp = self.client.get(f"{BASE_URL}/{account_id}")
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
